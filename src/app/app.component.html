@@ -1,0 +1,76 @@
+<div *ngIf="juego_iniciado == false">
+  <div class="container">
+      <div class="row">
+          <img src="assets/img/juego-ahorcado.jpg" class="ahorcado-img">
+      </div>
+      <div class="row mt-4 pt-4">
+        <div class="col">
+            <div class="form-inline">
+                <div class="form-group mb-2">
+                  <input type="text" readonly class="form-control-plaintext" value="Indica la palabra oculta">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                  <input type="text" [value]="palabra" (input)="palabra = $event.target.value" class="form-control">
+                </div>
+                <button type="button" (click)="start()" class="btn btn-danger mb-2">Comenzar juego</button>
+              </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="juego_iniciado">
+<div class="row"> 
+
+    <div class="col text-center">
+  
+      
+        <img src="assets/img/{{ intentos}}.png" class="ahorcado-img">
+  
+     <h3>Intentos <small> {{ intentos }} / 9</small></h3>
+  
+    </div>
+  </div>
+
+  
+
+  <div class="row"> 
+
+      <div class="col text-center">
+    
+        <h1> {{palabraOculta}}</h1>
+    
+      </div>
+    </div> 
+
+
+    <div class="row" *ngIf="gano"> 
+      <div class="col text-center">
+    
+        <h1> Felicidades Ganaste !!!</h1>
+        <h4> :D </h4>
+    
+      </div>
+    </div>
+
+    <div class="row" *ngIf="perdio"> 
+      <div class="col text-center">
+    
+        <h1> Lo siento, Perdiste :(</h1>
+        <h4> {{ palabra }} </h4>
+    
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!gano && !perdio"> 
+
+        <div class="col text-center" id="buttons">
+
+         <button (click)="comprobar( letra )"*ngFor="let letra of letras" attr.id="button-{{letra}}" class="btn btn-primary">
+           {{letra}}
+          </button>
+
+      
+        </div>
+      </div>
+    </div>
